@@ -1,0 +1,22 @@
+AttackStdScale:--name|~0! (Level ~LVL$) --Type|~1! --Move Power|~2! ([[~MOVE$]]) --Move Time|~3! --PP|~4! --Duration|~5! --Range|~6! --Attack|[[ [$Atk] 1d20 + ~MOVE$ + ceil( (~LVL$) /4) + 1]] --Description|~7! --STAB|[[ceil(( (~LVL$-2) )/4)]] -- ?? ~LVL$ < 5 ?? Lvl 1 Damage|[[~D1$ + ~MOVE$]] -- ?? ~LVL$ > 4 AND ~LVL$ < 10 ?? Lvl 5 Damage|[[~D5$ + ~MOVE$]] -- ?? ~LVL$ > 9 AND ~LVL$ < 17 ?? Lvl 10 Damage|[[~D10$ + ~MOVE$]] -- ?? ~LVL$ > 16 ?? Lvl 17 Damage|[[~D17$ + ~MOVE$]]
+
+AttackCustDmg:--name|~0! (Level ~LVL$) --Type|~1! --Move Power|~2! --Move Time|~3! --PP|~4! --Duration|~5! --Range|~6! --Attack|[[ [$Atk] 1d20 ]] + [[~MOVE$ + ceil( ~LVL$ /4) + 1]] --Description|~7! --STAB|[[ceil(((~LVL$-2) )/4)]]
+
+AttackOnly:--name|~0! (Level ~LVL$) --Type|~1! --Move Power|~2! --Move Time|~3! --PP|~4! --Duration|~5! --Range|~6! --Attack|[[ [$Atk] 1d20 ]] + [[~MOVE$ + ceil( ~LVL$ /4) + 1]] --Description|~7!
+
+Save:--name|~0! (Level ~LVL$) --Type|~1! --Move Power|~2! ([[~MOVE$]]) --Move Time|~3! --PP|~4! --Duration|~5! --Range|~6! --Save|~7! (DC  [[8 + ~MOVE$ + ceil( ~LVL$ /4) + 1]]) --Description|~8!
+
+StatusRoll: -- ?? $Atk.base >= ~0! ?? Status| The attack applies a status!
+
+FollowupStrikes: --Followup Strikes| Total damage is under last green roll below --!^3hide | [[d0]] [[d2]] [[d2]] [[d2]] [[d2]] -- ?? ~LVL$ < 5 ?? Damage *1|[#[ [$Atk1] ~D1$ + ~MOVE$ ]#] [#[ [$Atk1] ~D1$ + ~MOVE$ + 1d4 ]#] [#[ [$Atk1] ~D1$ + ~MOVE$ + 2d4 ]#] [#[ [$Atk1] ~D1$ + ~MOVE$ + 3d4 ]#] [#[ [$Atk1] ~D1$ + ~MOVE$ + 4d4 ]#] -- ?? ~LVL$ > 4 AND ~LVL$ < 10 ?? Damage *2|[#[ [$Atk1] ~D5$ + ~MOVE$ ]#] [#[ [$Atk1] ~D5$ + ~MOVE$ + 1d4 ]#] [#[ [$Atk1] ~D5$ + ~MOVE$ + 2d4 ]#] [#[ [$Atk1] ~D5$ + ~MOVE$ + 3d4 ]#] [#[ [$Atk1] ~D5$ + ~MOVE$ + 4d4 ]#] -- ?? ~LVL$ > 9 AND ~LVL$ < 17 ?? Damage *3|[#[ [$Atk1] ~D10$ + ~MOVE$ ]#] [#[ [$Atk1] ~D10$ + ~MOVE$ + 1d4 ]#] [#[ [$Atk1] ~D10$ + ~MOVE$ + 2d4 ]#] [#[ [$Atk1] ~D10$ + ~MOVE$ + 3d4 ]#] [#[ [$Atk1] ~D10$ + ~MOVE$ + 4d4 ]#] -- ?? ~LVL$ > 16 ?? Damage *4|[#[ [$Atk1] ~D17$ + ~MOVE$ ]#] [#[ [$Atk1] ~D17$ + ~MOVE$ + 1d4 ]#] [#[ [$Atk1] ~D17$ + ~MOVE$ + 2d4 ]#] [#[ [$Atk1] ~D17$ + ~MOVE$ + 3d4 ]#] [#[ [$Atk1] ~D17$ + ~MOVE$ + 4d4 ]#]
+
+MultiAttack: --name|~0! (Level ~LVL$) --Type|~1! --Move Power|~2! ([[~MOVE$]]) --Move Time|~3! --PP|~4! --Duration|~5! --Range|~6! --Attack#~7!|[[ [$Atk] 1d20  + ~MOVE$ + ceil( ~LVL$ /4) + 1]] --Description|~8! --STAB|[[ceil(( (~LVL$-2) )/4)]] -- ?? ~LVL$ < 5 ?? Damage#~7!|[[~D1$ + ~DMGMOD$]] -- ?? ~LVL$ > 4 AND ~LVL$ < 10 ?? Damage#~7!|[[~D5$ + ~DMGMOD$]] -- ?? ~LVL$ > 9 AND ~LVL$ < 17 ?? Damage#~7!|[[~D10$ + ~DMGMOD$]] -- ?? ~LVL$ > 16 ?? Damage#~7!|[[~D17$ + ~DMGMOD$]]
+
+Buff:--name|~0! --Type|~1! --Move Power|~2! --Move Time|~3! --PP|~4! --Duration|~5! --Range|~6! --Description|~7!
+
+SaveNote: --Save|~0! (DC  [[8 + ~MOVE$ + ceil( ~LVL$ /4) + 1]])
+
+PlainRollScale: -- ?? ~LVL$ < 5 ?? Lvl 1 ~0!|[[~D1$ ]] -- ?? ~LVL$ > 4 AND ~LVL$ < 10 ?? Lvl 5 ~0!|[[~D5$ ]] -- ?? ~LVL$ > 9 AND ~LVL$ < 17 ?? Lvl 10 ~0!|[[~D10$ ]] -- ?? ~LVL$ > 16 ?? Lvl 17 ~0!|[[~D17$ ]]
+
+AutoDamage:--name|~0! (Level ~LVL$) --Type|~1! --Move Power|~2! ([[~MOVE$]]) --Move Time|~3! --PP|~4! --Duration|~5! --Range|~6! --Description|~7! --STAB|[[ceil(( (~LVL$-2) )/4)]] -- ?? ~LVL$ < 5 ?? Lvl 1 Damage|[[~D1$ + ~MOVE$]] -- ?? ~LVL$ > 4 AND ~LVL$ < 10 ?? Lvl 5 Damage|[[~D5$ + ~MOVE$]] -- ?? ~LVL$ > 9 AND ~LVL$ < 17 ?? Lvl 10 Damage|[[~D10$ + ~MOVE$]] -- ?? ~LVL$ > 16 ?? Lvl 17 Damage|[[~D17$ + ~MOVE$]]
+
