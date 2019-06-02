@@ -3,7 +3,7 @@
     "macros": [
         {
             "attributes": {
-                "action": "&{template:default} {{name=Absorb}} {{Type=Grass}} {{Move Power=STR/DEX}} {{Move Time= 1 action}} {{PP=15}} {{Duration=Instantaneous}} {{Range=Melee}} {{Description=You attempt to absorb some of an enemy’s health. Make a melee attack on a Pokémon. On a hit, the Pokémon takes 1d6 + MOVE grass damage. Half the damage done is restored by the user.}} {{Attack=[[d20]]}}{{Damage}}{{1st Level=[[1d6]]}}{{5th Level=[[1d12]]}}{{10th Level=[[2d8]]}}{{17th Level=[[4d6]]}}",
+                "action": "!power {{\n  --replacement|d6std\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackStdScale|Absorb;Grass;STR/DEX;1 action;15;Instantaneous;Melee;You attempt to absorb some of an enemy’s health. Make a melee attack on a Pokémon. On a hit, the Pokémon takes 1d6 + MOVE grass damage. Half the damage done is restored by the user.\n}}",
                 "istokenaction": false,
                 "name": "Absorb",
                 "visibleto": "all"
@@ -14,7 +14,7 @@
                 "action": "!power {{\n  --replacement|d6std\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackStdScale|Scratch;Normal;STR/DEX;1 action;20;Instantaneous;Melee;You slash out at a Pokémon in range. Make a melee attack, doing 1d6 + MOVE normal damage on a hit.\n}}",
                 "istokenaction": false,
                 "name": "Scratch",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -22,7 +22,7 @@
                 "action": "!power {{\n  --replacement|d10std\n  --template|AttackStdScale|AncientPower;Rock;STR/DEX;1 action;3;Instantaneous;Melee;You lash out with unknown inner power. Make a melee attack roll against a creature, doing 1d10 + MOVE rock damage on a hit. On a natural attack roll of 19 or 20, all of your ability scores go up by 1 while you remain in battle. This move can be stacked for a maximum of +5 to all\nability scores.}}",
                 "istokenaction": false,
                 "name": "AncientPower",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -30,7 +30,7 @@
                 "action": "!power {{\n  --replacement|d4std\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackCustDmg|Arm Thrust;Fighting;STR/DEX;1 action;10;Instantaneous;Melee\n  --Description|Your unleash a flurry of fists on an opponent.\nMake a melee attack roll, doing 1d4 + MOVE fighting damage on a hit. After successfully hitting a target, roll a d4. On a result of 3 or 4, you may immediately hit again for an additional 1d4 fighting damage. Continue this process until you fail to roll a 3 or 4 on the d4 roll, up to a maximum of four additional hits.\n  --template|FollowupStrikes\n}}",
                 "istokenaction": false,
                 "name": "ArmThrust",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -38,7 +38,7 @@
                 "action": "!power {{\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|Save|Growl;Normal;CHA/STR;1 action;20;1 minute;100ft;WIS;You target a Pokémon with an intimidating growl. The Pokémon must make a WIS save against your Move DC. On a fail, it adds -1 to any attack it makes for the duration. This modifier can be stacked if it fails multiple growl saves, up to a maximum of -5}}",
                 "istokenaction": false,
                 "name": "Growl",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -46,23 +46,15 @@
                 "action": "!power {{\n  --replacement|d6std\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackStdScale|Ember;Fire;STR/DEX;1 action;15;Instantaneous;60ft;You hurl a ball of flame at an enemy within range. Make a ranged attack, doing 1d6 + Move fire damage on a successful hit. If the natural attack roll is 19 or 20, the target is burnt.\n --template|StatusRoll|19\n}}",
                 "istokenaction": false,
                 "name": "Ember",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
             "attributes": {
-                "action": "!power {{\n  --template|Save|Smokescreen;Normal;CON;1 action;10;1 minute, Concentration;60ft;CON;You conjure a line of smoke on the battlefield, 60 feet long and 5 feet thick. The area on either side is obscured and imposes disadvantage on any ranged attacks made by a Pokémon targeting another on the opposite side. Any Pokémon inside the wall of smoke, when it is conjured, must make a CON save against your Move DC or become blinded for the duration.\n}}",
+                "action": "!power {{\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|Save|Smokescreen;Normal;CON;1 action;10;1 minute, Concentration;60ft;CON;You conjure a line of smoke on the battlefield, 60 feet long and 5 feet thick. The area on either side is obscured and imposes disadvantage on any ranged attacks made by a Pokémon targeting another on the opposite side. Any Pokémon inside the wall of smoke, when it is conjured, must make a CON save against your Move DC or become blinded for the duration.\n}}",
                 "istokenaction": false,
                 "name": "Smokescreen",
-                "visibleto": ""
-            }
-        },
-        {
-            "attributes": {
-                "action": "!showMarchingOrderMenu",
-                "istokenaction": false,
-                "name": "MarchingOrderMenu",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -70,23 +62,23 @@
                 "action": "!power {{\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackOnly|String Shot;Bug;DEX;1 action;20;1 minute;60ft;You unleash sticky string at a Pokémon in range, slowing it down. Make a ranged attack roll against a target. On a hit, the target’s speed is reduced by 10 for the\nduration. The target may take an action to attempt to get rid\nof any string with a STR save against your Move DC. If this\nreduction in speed causes their speed to be 0, they are\nrestrained.}}",
                 "istokenaction": false,
                 "name": "StringShot",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
             "attributes": {
-                "action": "!power {{\n  --replacement|d6low\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackStdScale|Tackle;Naormal;STR;1 action;20;Instantaneous;Melee;You rush forward and slam into an opponent.Make a melee attack roll against a target, doing 1d6 + MOVE on a hit.}}",
+                "action": "!power {{\n  --replacement|d6low\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackStdScale|Tackle;Naormal;STR/DEX;1 action;20;Instantaneous;Melee;You rush forward and slam into an opponent.Make a melee attack roll against a target, doing 1d6 + MOVE on a hit.}}",
                 "istokenaction": false,
                 "name": "Tackle",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
             "attributes": {
-                "action": "!power {{\n  --template|Save|Tail Whip;Normal;CHA/DEX;1 action;15;1 minute;100ft;WIS;You shake your tail at an enemy Pokémon, distracting it and opening up its defenses. The Pokémon must make a WIS save against your Move DC. On a fail, allies add +1 to any attack they target it with for the duration. This modifier can be stacked if it fails multiple tail whip saves, up to a maximum of +5.\n}}",
+                "action": "!power {{\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|Save|Tail Whip;Normal;CHA/DEX;1 action;15;1 minute;100ft;WIS;You shake your tail at an enemy Pokémon, distracting it and opening up its defenses. The Pokémon must make a WIS save against your Move DC. On a fail, allies add +1 to any attack they target it with for the duration. This modifier can be stacked if it fails multiple tail whip saves, up to a maximum of +5.\n}}",
                 "istokenaction": false,
                 "name": "TailWhip",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -94,7 +86,7 @@
                 "action": "!power {{\n  --replacement|d4low\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackStdScale|Quick Attack;Normal;DEX;1 bonus action;15;Instantaneous;10ft;You lash out with a quick unarmed strike at a Pokémon in range. As a bonus action, you can immediately move and attack a Pokémon in range without taking an attack of opportunity, doing 1d4 normal damage on a hit.\n}}",
                 "istokenaction": false,
                 "name": "QuickAttack",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -102,15 +94,7 @@
                 "action": "!power {{\n  --replacement|d10std\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackStdScale|Bite;Dark;STR/DEX;1 action;15;Instantaneous;Melee;You sink your teeth into an enemy Pokémon. Make a melee attack roll, doing 1d10 + MOVE dark damage on a successful hit. On natural attack rolls of 19 or 20, the target flinches\n --template|StatusRoll|19\n}}",
                 "istokenaction": false,
                 "name": "Bite",
-                "visibleto": ""
-            }
-        },
-        {
-            "attributes": {
-                "action": "!power {{\n  --template|Save|Sand Attack;Ground;DEX/CON;1 action;10;Instantaneous;30ft;CON;You kick up a cloud of sand in an attempt to blind a target in range. The target must make a CON save against your Move DC. On a fail, for the remainder of the encounter, they add -1 to all of their attack rolls. This move\ncan be stacked for a maximum of -5 to attack rolls.}}",
-                "istokenaction": false,
-                "name": "SandAttack",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -118,15 +102,7 @@
                 "action": "!power {{\n  --replacement|d6std\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackStdScale|Gust;Normal;DEX;1 action;20;Instantaneous;40ft;You create a strong wind that batters enemy Pokémon. Make a ranged attack on a single Pokémon, doing 1d6 + MOVE flying damage on a hit.\n}}",
                 "istokenaction": false,
                 "name": "Gust",
-                "visibleto": ""
-            }
-        },
-        {
-            "attributes": {
-                "action": "!ct add ?{condition name} ?{duration|10} ?{direction|-1} ?{message}",
-                "istokenaction": true,
-                "name": "Add-Condition",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -134,7 +110,7 @@
                 "action": "!power {{\n  --replacement|d8low\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackStdScale|Vine Whip;Grass;STR/DEX;1 action;15;Instantaneous;15ft;You extend a sharp vine to whip the opponent with.\n}}",
                 "istokenaction": false,
                 "name": "VineWhip",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -142,7 +118,7 @@
                 "action": "!power {{\n  --replacement|d4std\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackOnly|Fury Attack;Normal;STR/DEX;1 action;10;Instantaneous;Melee;You reach out and unleash relentless strikes\nagainst a Pokémon.\n  --template|FollowupStrikes\n}}",
                 "istokenaction": false,
                 "name": "FuryAttack",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -150,7 +126,7 @@
                 "action": "!power {{\n  --replacement|d4high\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --inlinereplace|DMGMOD|?{Move Modifier}\n  --template|MultiAttack|Twineedle;Bug;DEX;1 action;5;Instantaneous;40ft;2;You fire two sharp projectiles at Pokémon in range. They do not have to target the same opponent.\n}}",
                 "istokenaction": false,
                 "name": "Twineedle",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -158,7 +134,7 @@
                 "action": "!power {{\n  --replacement|d4std\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackStdScale|Wrap;Normal;STR/DEX;1 action;15;Instantaneous;Melee;You attempt to grapple a target into submission. Make a melee attack roll. On a hit, the target takes 1d4 + MOVE normal damage and is grappled and restrained. At the beginning of each of its turns, it may attempt to escape with a STR save against your Move DC. As long as the target is restrained on your subsequent turns, this move can be activated again as a bonus action with an automatic hit, dealing 1d4 normal damage.\n}}",
                 "istokenaction": false,
                 "name": "Wrap",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -166,15 +142,15 @@
                 "action": "!power {{\n  --replacement|d4std\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackStdScale|Poison Sting;Poison;STR/DEX;1 action;15;Instantaneous;Melee;You strike out at a Pokémon with a poisonous sting. Make a melee attack roll against a target, doing 1d4 + MOVE poison damage on a hit. If the natural attack roll is 18 or more, the Pokémon is poisoned.\n --template|StatusRoll|18\n}}",
                 "istokenaction": false,
                 "name": "PoisonSting",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
             "attributes": {
-                "action": "!power {{\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|Save|Leer;Normal;WIS/CHA;1 action;15;1 minute;60ft;WIS;You stare down an enemy Pokémon, reducing its\nwill. The Pokémon must make a WIS save against your Move DC. On a fail, allies may add +1 to any attack they target it with for the duration. This modifier can be stacked if it fails multiple leer saves, up to a maximum of +5.\n}}",
+                "action": "!power {{\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|Save|Leer;Normal;WIS/CHA;1 action;15;1 minute;60ft;WIS;You stare down an enemy Pokémon, reducing its will. The Pokémon must make a WIS save against your Move DC. On a fail, allies may add +1 to any attack they target it with for the duration. This modifier can be stacked if it fails multiple leer saves, up to a maximum of +5.\n}}",
                 "istokenaction": false,
                 "name": "Leer",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -182,7 +158,7 @@
                 "action": "!power {{\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|Save|Hypnosis;Psychic;WIS/INT;1 action;10;1 minute;30ft;WIS;You attempt to put the target to sleep. The target must make a WIS save against your Move DC, falling asleep on a failure.\n}}",
                 "istokenaction": false,
                 "name": "Hypnosis",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -190,7 +166,7 @@
                 "action": "!power {{\n  --replacement|d6low\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackStdScale|Lick;Ghost;WIS/INT;1 action;15;Instantaneous;Melee;You reach out and lick an enemy Pokémon. Make a melee attack roll. On a hit, do 1d6 + MOVE ghost damage. On a natural attack roll of 18 or higher, the target becomes paralyzed.\n  --template:StatusRoll|18\n}}",
                 "istokenaction": false,
                 "name": "Lick",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -198,7 +174,7 @@
                 "action": "!power {{\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|Save|Roar;Normal;STR/CHA;1 action;10;1 minute;100ft;CHA;You release an intimidating roar at a wild\nPokémon in range. The target must make a CHA save against your Move DC, fleeing from battle on fail. You gain no experience from a fleeing Pokémon, and the move automatically fails in trainer battles. A creature that succeeds on this saving throw is unaffected by future attempts during this combat.}}",
                 "istokenaction": false,
                 "name": "Roar",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -206,7 +182,7 @@
                 "action": "!power {{\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|Save|Foresight;Normal;WIS;1 action;20;1 minute;50ft;WIS;Force a target in range to make a WIS saving\nthrow against your Move DC. On a fail, add +2 to all attack\nrolls you make against the opponent for the duration. Regardless of the saving throw, for the remainder of combat, any of your fighting or normal moves can hit a ghost type Pokémon. If you are a ghost type, your ghost moves can now hit normal type Pokémon.}}",
                 "istokenaction": false,
                 "name": "Foresight",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -214,7 +190,7 @@
                 "action": "!power {{\n  --replacement|d4stdalt\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --inlinereplace|DMGMOD|0\n  --template|MultiAttack|Bubble;Water;DEX;1 action;15;Instantaneous;60ft;3;You shoot a series of quickly moving bubbles at a target. Make three ranges attacks, doing 1d4 water damage on each successful hit.\n}}",
                 "istokenaction": false,
                 "name": "Bubble",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -222,7 +198,7 @@
                 "action": "!power {{\n  --template|Buff|Mud Sport;Ground;None;1 action;10;1 minute;5ft;You cover yourself and all allies around you with thick mud, reducing the amount of electric damage taken for anyone affected. For the duration, you and any ally in range (when you initially activated this move) have resistance to electric-type attacks. If you were already resistant, you are now immune. If you were vulnerable, you now take regular damage. If you are immune to electric-type moves already, nothing happens.\n}}",
                 "istokenaction": false,
                 "name": "MudSport",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -230,7 +206,7 @@
                 "action": "!power {{\n  --replacement|d10std\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackStdScale|Covet;Normal;DEX;1 action;15;Instantaneous;Melee;You strike out with quick and sticky hands. Make a melee attack roll against an opponent, doing 1d10 + MOVE normal damage on a hit. On a successful attack, you steal the opponents held item if you are not currently holding one.\n}}",
                 "istokenaction": false,
                 "name": "Covet",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -238,7 +214,7 @@
                 "action": "!power {{\n  --template|Buff|Focus Energy;Normal;None;1 action;10;1 minute;Self;You sacrifice your action to focus in on the\nenergy inside you. For the duration, increase your critical\nrange by 1 (From 20 to 19+ , from 19+ to 18+, etc.). This\nmove is stackable up to a maximum of +5 to the critical hit\nrange (15+).\n}}",
                 "istokenaction": false,
                 "name": "FocusEnergy",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -246,7 +222,7 @@
                 "action": "!power {{\n  --replacement|d8std\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackStdScale|Low Kick;Fighting;STR/DEX;1 action;10;Instantaneous;Melee;You kick out at a Pokémon’s lower half, attempting to knock it off balance. Make a melee attack, doing 1d8 + MOVE fighting damage on a hit. If the natural attack roll is 19 or 20, the target flinches.\n --template|StatusRoll|19\n}}",
                 "istokenaction": false,
                 "name": "LowKick",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -254,7 +230,7 @@
                 "action": "!power {{\n  --replacement|d6low\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackStdScale|Peck;Flying;STR/DEX;1 action;20;Instantaneous;Melee;You hammer down on an enemy with a peck attack. Make a melee attack roll on a target, doing 1d6 + MOVE flying damage on a successful hit.\n}}",
                 "istokenaction": false,
                 "name": "Peck",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -262,7 +238,7 @@
                 "action": "!power {{\n  --template|Buff|Harden;Normal;None;1 action;15;1 minute;Self;You increase your defense, adding + 1 to your\nAC. This effect can be stacked with multiple Harden moves,\nto a maximum of + 5 AC.\n}}",
                 "istokenaction": false,
                 "name": "Harden",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -270,7 +246,7 @@
                 "action": "!power {{\n  --replacement|d6std\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackStdScale|Thunder Shock;Electric;STR/DEX;1 action;20;Instantaneous;20ft;You deliver an electric shock to an enemy Pokemon in range. Make a ranged attack on a Pokémon, doing 1d6 + MOVE electric damage on a hit.\n}}",
                 "istokenaction": false,
                 "name": "ThunderShock",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -278,7 +254,7 @@
                 "action": "!power {{\n  --template|Buff|Water Sport;Water;None;1 action;10;1 minute;5ft;You soak yourself and all allies with water, reducing the amount of fire damage taken for anyone affected. For the duration, you and any ally in range (when you initially activated this move) have resistance to fire-type attacks. If you were already resistant, you are now immune. If you were vulnerable, you now take normal damage. If you are immune to fire-type moves already, nothing happens.\n}}",
                 "istokenaction": false,
                 "name": "WaterSport",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -286,7 +262,7 @@
                 "action": "!power {{\n  --template|Buff|Defense Curl;Normal;None;1 action;20;1 minute;Self;You curl up into a tight ball, increasing your\ndefensive stance. Until your next turn, you gain + 4 to your\nAC and have resistance to normal attacks.\n}}",
                 "istokenaction": false,
                 "name": "DefenseCurl",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -294,7 +270,7 @@
                 "action": "!power {{\n  --template|Buff|Yawn;Normal;None;1 action;5;1 round;30ft;You release a big yawn that causes an opponent to become very drowsy. Choose a target in range. If that target is still in the battle at the end of its next turn, it falls asleep.\n}}",
                 "istokenaction": false,
                 "name": "Yawn",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -302,31 +278,7 @@
                 "action": "!power {{\n  --replacement|d4high\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackStdScale|Constrict;Normal;STR;1 action;15;Instantaneous;Melee;You wrap yourself around an enemy Pokémon, trying to squeeze the life from them. Make a melee attack roll. On a hit, the target takes 1d4 + MOVE normal damage and is grappled and restrained. At the beginning of each of its turns, it may attempt to escape with a STR save against\nyour Move DC. As long as the target is restrained on your subsequent turns, this move can be activated again as a bonus action with an automatic hit, dealing 1d4 normal damage.\n --template|SaveNote|STR\n}}",
                 "istokenaction": false,
                 "name": "Constrict",
-                "visibleto": ""
-            }
-        },
-        {
-            "attributes": {
-                "action": "!power {{\n  --replacement|d6std\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackStdScale|Scratch;Normal;STR/DEX;1 action;20;Instantaneous;Melee;You slash out at a Pokémon in range. Make a melee attack, doing 1d6 + MOVE normal damage on a hit.\n}}",
-                "istokenaction": false,
-                "name": "Scratch",
-                "visibleto": ""
-            }
-        },
-        {
-            "attributes": {
-                "action": "!power {{\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackOnly|String Shot;Bug;DEX;1 action;20;1 minute;60ft;You unleash sticky string at a Pokémon in range, slowing it down. Make a ranged attack roll against a target. On a hit, the target’s speed is reduced by 10 for the\nduration. The target may take an action to attempt to get rid\nof any string with a STR save against your Move DC. If this\nreduction in speed causes their speed to be 0, they are\nrestrained.}}",
-                "istokenaction": false,
-                "name": "StringShot",
-                "visibleto": ""
-            }
-        },
-        {
-            "attributes": {
-                "action": "!power {{\n  --replacement|d6low\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackStdScale|Tackle;Naormal;STR;1 action;20;Instantaneous;Melee;You rush forward and slam into an opponent.Make a melee attack roll against a target, doing 1d6 + MOVE on a hit.}}",
-                "istokenaction": false,
-                "name": "Tackle",
-                "visibleto": ""
+                "visibleto": "all"
             }
         },
         {
@@ -334,7 +286,111 @@
                 "action": "!power {{\n  --template|Save|Sand Attack;Ground;DEX/CON;1 action;10;Instantaneous;30ft;CON;You kick up a cloud of sand in an attempt to blind a target in range. The target must make a CON save against your Move DC. On a fail, for the remainder of the encounter, they add -1 to all of their attack rolls. This move\ncan be stacked for a maximum of -5 to attack rolls.}}",
                 "istokenaction": false,
                 "name": "SandAttack",
+                "visibleto": "all"
+            }
+        },
+        {
+            "attributes": {
+                "action": "!power {{\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --name|Level ~LVL$\n  --Attack|[[ [$Atk] 1d20 + ~MOVE$ + ceil( ~LVL$ /4) + 1]]\n  --Damage|[[?{Total Damage Roll}]]\n}}",
+                "istokenaction": false,
+                "name": "Attack",
+                "visibleto": "all"
+            }
+        },
+        {
+            "attributes": {
+                "action": "!power {{\n  --template|Buff|Growth;Normal;None;1 action;20;1 minute;30ft;You increase the size of an ally Pokémon. When you use this move, a Pokémon in range (or you) grows slightly larger, gaining the ability to add a d4 to any attack roll or saving throw for the duration. The dice to add increases to 1d6 at level 10.\n}}",
+                "istokenaction": false,
+                "name": "Growth",
+                "visibleto": "all"
+            }
+        },
+        {
+            "attributes": {
+                "action": "!power {{\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --replacement|d4low\n  --template|Save|Spite;Ghost;WIS;1 reaction;3;Instantaneous;30ft;WIS;When hit with an attack, you can spend a reaction to attempt to drain the attacker’s PP. Force the attacker to make a WIS save against your Move DC. On a fail, roll a d4. The PP of the move that attacked you is decreased by that number.\n --template|PlainRollScale|PP Drained\n}}",
+                "istokenaction": false,
+                "name": "Spite",
+                "visibleto": "all"
+            }
+        },
+        {
+            "attributes": {
+                "action": "!token-mod --set represents|@{PKMN|character_id} bar1_value|?{HP} bar1_max|?{HP} bar2_value|?{AC} bar3_value|?{Speed}",
+                "istokenaction": false,
+                "name": "Spawn",
                 "visibleto": ""
+            }
+        },
+        {
+            "attributes": {
+                "action": "!token-mod --set bar1_link|hp bar2_link|ac bar3_link|speed defaulttoken",
+                "istokenaction": false,
+                "name": "Capture",
+                "visibleto": ""
+            }
+        },
+        {
+            "attributes": {
+                "action": "!power {{\n  --replacement|d6std\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackStdScale|Pound;Normal;STR/DEX;1 action;15;Instantaneous;Melee;You crush an opponent with a pound attack. Make a melee attack roll against a target, doing 1d6 + MOVE normal damage on a hit.}}",
+                "istokenaction": false,
+                "name": "Pound",
+                "visibleto": "all"
+            }
+        },
+        {
+            "attributes": {
+                "action": "!power {{\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|Save|Sweet Kiss;Fairy;WIS/CHA;1 action;10;Instantaneous;Melee;INT;You target a Pokémon with an intimidating growl. The Pokémon must make a WIS save against your Move DC. On a fail, it adds -1 to any attack it makes for the duration. This modifier can be stacked if it fails multiple growl saves, up to a maximum of -5}}",
+                "istokenaction": false,
+                "name": "SweetKiss",
+                "visibleto": "all"
+            }
+        },
+        {
+            "attributes": {
+                "action": "!power {{\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|Save|Stun Spore;Grass;CON;1 reaction;3;Instantaneous;Melee;CON;When you are hit by a melee attack, you can use your reaction to release a spore that attempts to stun your attacker. The Pokémon must make a CON save against your Move DC, becoming paralyzed on a fail.}}",
+                "istokenaction": false,
+                "name": "StunSpore",
+                "visibleto": "all"
+            }
+        },
+        {
+            "attributes": {
+                "action": "!power {{\n  --replacement|d8low\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AttackStdScale|Razor Leaf;Grass;STR/DEX;1 action;15;Instantaneous;80ft;You send a razor sharp leaf at a Pokémon in range at tremendous speed. Make a ranged attack roll, doing 1d8 + MOVE grass damage on a hit. Razor Leaf results in a critical hit on 19s and 20s\n --template|StatusRoll|19\n}}",
+                "istokenaction": false,
+                "name": "RazorLeaf",
+                "visibleto": "all"
+            }
+        },
+        {
+            "attributes": {
+                "action": "!power {{\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|Save|Poison Powder;Poison;CON;1 action;20;Instantaneous;40ft;CON;You release a cluster of poisonous spores that burst into the air above a Pokémon. The Pokémon must succeed on a CON save against your Move DC, becoming poisoned on a fail.\n}}",
+                "istokenaction": false,
+                "name": "PoisonPowder",
+                "visibleto": "all"
+            }
+        },
+        {
+            "attributes": {
+                "action": "!power {{\n  --replacement|d4high\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|AutoDamage|Disarming Voice;Fairy;CHA;1 action;10;Instantaneous;20ft;You let out a charming cry, dealing emotional damage to any creature in range that can hear you. This move automatically hits for 1d4 + MOVE fairy damage unless a creature is in the invulnerable stages of Fly, Dig, Bounce, etc.\n}}",
+                "istokenaction": false,
+                "name": "DisarmingVoice",
+                "visibleto": "all"
+            }
+        },
+        {
+            "attributes": {
+                "action": "!power {{\n  --replacement|specialsing\n  --inlinereplace|MOVE|0\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|Buff|Sing;Normal;CHA;1 action;10;Instantaneous;30ft;You sing a beautiful song in an attempt to put enemy Pokémon to to sleep. Roll 5d8, the total is how many hit points of Pokémon this spell can affect. Pokémon within 30 feet of you are affected in ascending order of their current hit points. Starting with the Pokémon that has the lowest current hit points, each Pokémon affected by this spell falls asleep. Subtract each Pokémon’s hit points from the total before moving on to the Pokémon with the next lowest hit points. A Pokémon’s hit points must be equal to or less than the remaining total for that creature to be affected.\n  --template|PlainRollScale|Total HP Affected\n}}",
+                "istokenaction": false,
+                "name": "Sing",
+                "visibleto": "all"
+            }
+        },
+        {
+            "attributes": {
+                "action": "!power {{\n  --replacement|specialconstant\n  --inlinereplace|MOVE|?{Move Modifier}\n  --inlinereplace|LVL|?{Pokemon Level}\n  --template|Save|Charm;Fairy;CHA/WIS;1 action;10;1 minute;80ft;WIS;You target a Pokémon with an intimidating growl. You attempt to charm an opponent, sharply decreasing its attack. A target you choose in range must make a WIS save against your Move DC. On a fail, the target adds -2 to all attacks against you for the duration.\n  --template|PlainRollScale|Attacks Reduced By\n}}",
+                "istokenaction": false,
+                "name": "Charm",
+                "visibleto": "all"
             }
         }
     ]
